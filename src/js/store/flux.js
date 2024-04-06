@@ -19,7 +19,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const jsonData = await response.json()
 					const namesArray = jsonData.results.map(person => person.name);	
 					
-					console.log(namesArray)
+			
 					
 					setStore({peopleNames:namesArray})
 					
@@ -36,7 +36,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						throw new Error(`Network response from api/people was not ok`);
 					}
 					const data = await response.json();
-					console.log(data)
+					
 					listPeopleArray.push(data);
 
 					let peopleDetaillist = [];
@@ -48,7 +48,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						if(!characterData.message) continue;
 						peopleDetaillist.push(characterData)
 
-						// console.log(characterData)
+						console.log("desde flux", characterData);
+						
 					}catch(error){
 						console.error('Error fetching character details for:', character.name, error)
 					}

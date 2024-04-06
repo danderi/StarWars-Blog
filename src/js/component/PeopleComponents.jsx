@@ -3,7 +3,6 @@ import { useFormAction } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
 
-
 export const PeopleComponents = () => {
 
     const navigate = useNavigate()
@@ -14,7 +13,7 @@ export const PeopleComponents = () => {
         actions.loadPeopleDetails();
     }
         , [])
-    console.log(store.peopleDetails)
+    console.log("data en people components", store.peopleDetails)
 
     const handlerNavigate = (person) =>{
         navigate(`/cardView/${person.result.uid}`)
@@ -40,7 +39,7 @@ export const PeopleComponents = () => {
                                         <p className="card-text">Gender: {person.result.properties.gender}</p>
                                         <p className="card-text">Height: {person.result.properties.height}</p>
                                         <p className="card-text">Birth Year: {person.result.properties.birth_year}</p>
-                                        <Link to={`/cardView/${person.result.uid}`}><a href="#" className="btn btn-primary">View Details</a></Link>
+                                        <Link to={`/cardView/${person.result.uid}`} className="btn btn-primary">View Details</Link>
                                         <button onClick={()=>handlerNavigate(person)}></button>
                                     </div>
                                 </div>
