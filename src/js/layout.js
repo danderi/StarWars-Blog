@@ -4,6 +4,8 @@ import ScrollToTop from "./component/scrollToTop";
 
 import { NuevaVista } from "./views/NuevaVista.jsx";
 import { MainView } from "./views/MainView.jsx";
+import {CardView} from "./views/CardView.jsx";
+
 import { PeopleComponents } from "./component/PeopleComponents.jsx";
 
 
@@ -31,6 +33,7 @@ const Layout = () => {
 						<Route path="/single/:theid" element={<Single />} />
 						<Route path="/nueva-vista" element={<NuevaVista />} />
 						<Route path="/mainView" element={<MainView />} />
+						<Route path="/cardView/:uid" element={<CardView />} />
 						<Route path="/people-components" element={<PeopleComponents />} />
 						<Route path="*" element={<h1>Not found!</h1>} />
 					</Routes>
