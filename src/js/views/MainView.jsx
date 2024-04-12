@@ -5,12 +5,14 @@ import {Navbar} from "../component/Navbar.jsx"
 import {Footer} from "../component/Footer.jsx"
 import { PeopleComponents } from "../component/PeopleComponents.jsx";
 import StarBackground from "../../img/background.jpg";
+import { PlanetComponents } from "../component/PlanetComponents.jsx";
 
 export const MainView = () => {
   return (
     <div style={{backgroundImage: `url(${StarBackground})`, backgroundSize: "cover"}}>
         <Navbar />
         <PeopleComponents />
+        <PlanetComponents />
         <Footer />
     </div>
   )

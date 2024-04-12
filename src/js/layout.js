@@ -2,20 +2,15 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
-import { NuevaVista } from "./views/NuevaVista.jsx";
 import { MainView } from "./views/MainView.jsx";
 import {CardView} from "./views/CardView.jsx";
 
 import { PeopleComponents } from "./component/PeopleComponents.jsx";
+import { PlanetComponents } from "./component/PlanetComponents.jsx";
 
-
-import { Home } from "./views/home";
-import { Demo } from "./views/demo";
-import { Single } from "./views/single";
 import injectContext from "./store/appContext";
 
 
-import { Footer } from "./component/footer";
 
 //create your first component
 const Layout = () => {
@@ -32,6 +27,7 @@ const Layout = () => {
 						<Route path="/mainView" element={<MainView />} />
 						<Route path="/cardView/:uid" element={<CardView />} />
 						<Route path="/people-components" element={<PeopleComponents />} />
+						<Route path="/planet-components" element={<PlanetComponents />} />
 						<Route path="*" element={<h1>Not found!</h1>} />
 					</Routes>
 				</ScrollToTop>

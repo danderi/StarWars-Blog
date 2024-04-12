@@ -4,14 +4,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			favorites: [],
 			peopleDetails: [],
 			peopleMain:[],
-			isLoadingPeople: false 
+			isLoadingPeople: false,
+			
+			planetDetails: [],
+			planetMain:[],
+			isLoadingPlanet: false,
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			// exampleFunction: () => {
-			// 	getActions().changeColor(0, "green");
-			// },
-
+			
 			addToFavorites: (name)=> {
 				const store = getStore();
 				let newFavorites = store.favorites;
@@ -32,6 +32,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			loadingPeopleMessage: () => {
 				const store = getStore();
 				setStore({...store, isLoadingPeople: true})
+			},
+
+			loadingPlanetMessage: () => {
+				const store = getStore();
+				setStore({...store, isLoadingPlanet: true})
 			},
 
 			loadPeopleDetails: async (who) => {
@@ -74,7 +79,44 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			loadPlanetDetails: async (who) => {
+				let planetMainList = [];
+				const store = getStore();
 
+				let url = `https://www.swapi.tech/api/planets/`;
+				if(who == "next") url=store.planetMain[0].next;
+				if(who == "previous")url=store.planetMain[0].previous;
+				
+				try{
+					const response = await fetch(url);
+					if(!response.ok){
+						throw new Error(`Network response from api/people was not ok`);
+					}
+					const data = await response.json();
+					planetMainList.push(data)
+
+					console.log(data.next,data.previous)
+
+					let planetDetaillist = [];
+					
+					for(let planet of data.results){
+					try{
+						const response = await fetch(planet.url);
+						const planetData = await response.json();
+						if(!planetData.message) continue;
+						planetDetaillist.push(planetData)
+
+						console.log("desde flux", planetData);
+					}catch(error){
+						console.error('Error fetching character details for:', planet.name, error)
+					}
+				}
+				setStore({...store, planetDetails:planetDetaillist, planetMain:planetMainList, isLoadingPlanet: false})
+				console.log("ESTE ES EL URL EN FLUX", store.planetMain[0].next)
+				}catch(error){
+					console.error('Error fetching planets:', error)
+				}
+			},
 
 			// changeColor: (index, color) => {
 			// 	//get the store

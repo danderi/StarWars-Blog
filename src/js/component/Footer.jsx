@@ -9,7 +9,7 @@ export const Footer = () => {
         <div>
             <footer className="footer mt-auto py-3 text-center" style={{backgroundImage: `url(${StarBackground})`, backgroundSize: "cover"}}>
                 <p style={{color:"white" }}>
-                    May the force be with you...<img style={{height:"100px", width:"100px" }} src={BabyYoda} />
+                    May the force be with you...<img style={{height:"80px", width:"65px" }} src={BabyYoda} />
                 </p>
                 
             </ footer>

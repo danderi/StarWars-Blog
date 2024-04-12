@@ -8,19 +8,19 @@ import { LoadingComponent } from "./LoadingComponent.jsx";
 
 
 
-export const PeopleComponents = () => {
+export const PlanetComponents = () => {
     const { store, actions } = useContext(Context)
     
-    let handlerPeopleNext = ()=>{
+    let handlerPlanetNext = ()=>{
             const who = "next";
-            actions.loadingPeopleMessage();
-            actions.loadPeopleDetails(who);
+            actions.loadingPlanetMessage();
+            actions.loadPlanetDetails(who);
         }
 
-    let handlerPeoplePrevious = ()=>{
+    let handlerPlanetPrevious = ()=>{
             const who = "previous";
-            actions.loadingPeopleMessage();
-            actions.loadPeopleDetails(who);
+            actions.loadingPlanetMessage();
+            actions.loadPlanetDetails(who);
         }
 
     let handlerFavorites = (name)=>{
@@ -29,12 +29,12 @@ export const PeopleComponents = () => {
 
     return (
         <div style={{margin: "30px"}}>
-            <h3 className="peopleComponents ms-3">People {store.isLoadingPeople === true ? <span className="fs-5"><LoadingComponent /></span> : <span></span>}</h3>
+            <h3 className="peopleComponents ms-3">Planets {store.isLoadingPlanet === true ? <span className="fs-5"><LoadingComponent /></span> : <span></span>}</h3>
             <div className="d-flex justify-content-center mb-4">
-                {store.peopleMain.length === 0 || store.peopleMain[0].previous === null? <p></p>: <button type="button" className="btn btn-dark me-2" onClick={handlerPeoplePrevious}><GrPrevious /></button>}
-                {store.peopleMain.length === 0 || store.peopleMain[0].next === null? <p></p>: <button type="button" className="btn btn-dark" onClick={handlerPeopleNext}><GrNext /></button>}
+                {store.planetMain.length === 0 || store.planetMain[0].previous === null? <p></p>: <button type="button" className="btn btn-dark me-2" onClick={handlerPlanetPrevious}><GrPrevious /></button>}
+                {store.planetMain.length === 0 || store.planetMain[0].next === null? <p></p>: <button type="button" className="btn btn-dark" onClick={handlerPlanetNext}><GrNext /></button>}
             </div>
-            {store.peopleDetails.length === 0 ? (
+            {store.planetDetails.length === 0 ? (
                 <div style={{Height: "10vh", color:"gray"}}>
                     <h1 className="d-flex justify-content-center"><LoadingComponent /></h1>
                 </div>
@@ -42,14 +42,14 @@ export const PeopleComponents = () => {
             <div className="overflow-x-auto" style={{ maxWidth: "100%", Height: "10vh" }}>
                 <div className="scroll-container" style={{ maxWidth: "100%", maxHeight: "100%", overflowX: "auto" }}>
                     <div className="row flex-nowrap" style={{ margin: "0" }}>
-                        {store.peopleDetails.map((person, index) => (
+                        {store.planetDetails.map((planet, index) => (
                             <div key={index} className="col-4" style={{ width: "300px", padding: "0 4px" }}>
                                 <div className="card-main" style={{ width: "75%" }}>
-                                    <img src={`https://starwars-visualguide.com/assets/img/characters/${person.result.uid}.jpg`} className="card-img-top" alt="..." style={{ height: "10%" }} />
+                                    <img src={`https://starwars-visualguide.com/assets/img/planets/${planet.result.uid}.jpg`} className="card-img-top" alt="..." style={{ height: "10%" }} />
                                     <div className="card-body mb-3">
-                                        <h5 className="card-title">{person.result.properties.name}</h5>
-                                        <Link to={`/cardView/${person.result.uid}`} className="btn btn-outline-dark me-4">View Details</Link>
-                                        <button type="button" className="btn btn-outline-warning" onClick={()=>handlerFavorites(person.result.properties.name)}><CiHeart /></button>
+                                        <h5 className="card-title">{planet.result.properties.name}</h5>
+                                        <Link to={`/cardView/${planet.result.uid}`} className="btn btn-outline-dark me-4">View Details</Link>
+                                        <button type="button" className="btn btn-outline-warning" onClick={()=>handlerFavorites(planet.result.properties.name)}><CiHeart /></button>
                                     </div>
                                 </div>
                             </div>
