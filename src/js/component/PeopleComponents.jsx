@@ -2,45 +2,55 @@ import React, { useState, useEffect, useContext } from "react";
 import { useFormAction } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
+import { CiHeart } from "react-icons/ci";
+import { GrPrevious } from "react-icons/gr";
+import { GrNext } from "react-icons/gr";
+import {LoadingComponent} from "./LoadingComponent.jsx";
+
+
 
 export const PeopleComponents = () => {
-
-    const navigate = useNavigate()
     const { store, actions } = useContext(Context)
+    
+    let handlerPeopleNext = ()=>{
+            const who = "next";
+            actions.loadingPeopleMessage();
+            actions.loadPeopleDetails(who);
+        }
 
-    useEffect(() => {
-        // actions.loadPeopleNames();
-        actions.loadPeopleDetails();
-    }
-        , [])
-    console.log("data en people components", store.peopleDetails)
+    let handlerPeoplePrevious = ()=>{
+            const who = "previous";
+            actions.loadingPeopleMessage();
+            actions.loadPeopleDetails(who);
+        }
 
-    const handlerNavigate = (person) =>{
-        navigate(`/cardView/${person.result.uid}`)
+    let handlerFavorites = (name)=>{
+        actions.addToFavorites(name);
     }
 
     return (
-        <div>
-            <h1>People</h1>
-            <button type="button" class="btn btn-light">Previous</button>
-            <button type="button" class="btn btn-dark">More People</button>
+        <div style={{margin: "30px"}}>
+            <h3 className="peopleComponents ms-3">People {store.isLoadingPeople === true ? <span className="fs-5"><LoadingComponent /></span> : <span></span>}</h3>
+            <div className="d-flex justify-content-center mb-4">
+                {store.peopleMain.length === 0 || store.peopleMain[0].previous === null? <p></p>: <button type="button" className="btn btn-dark me-2" onClick={handlerPeoplePrevious}><GrPrevious /></button>}
+                {store.peopleMain.length === 0 || store.peopleMain[0].next === null? <p></p>: <button type="button" className="btn btn-dark" onClick={handlerPeopleNext}><GrNext /></button>}
+            </div>
             {store.peopleDetails.length === 0 ? (
-                <p>loading...</p>
+                <div style={{Height: "10vh", color:"gray"}}>
+                    <h1><LoadingComponent /></h1>
+                </div>
             ) : (
-            <div className="overflow-x-auto" style={{ maxWidth: "100%", maxHeight: "50vh" }}>
+            <div className="overflow-x-auto" style={{ maxWidth: "100%", Height: "10vh" }}>
                 <div className="scroll-container" style={{ maxWidth: "100%", maxHeight: "100%", overflowX: "auto" }}>
                     <div className="row flex-nowrap" style={{ margin: "0" }}>
                         {store.peopleDetails.map((person, index) => (
-                            <div key={index} className="col-4" style={{ minWidth: "12rem", padding: "0 4px" }}>
-                                <div className="card" style={{ width: "75%" }}>
-                                    <img src="..." className="card-img-top" alt="..." style={{ height: "60%" }} />
-                                    <div className="card-body">
+                            <div key={index} className="col-4" style={{ width: "300px", padding: "0 4px" }}>
+                                <div className="card-main" style={{ width: "75%" }}>
+                                    <img src={`https://starwars-visualguide.com/assets/img/characters/${person.result.uid}.jpg`} className="card-img-top" alt="..." style={{ height: "10%" }} />
+                                    <div className="card-body mb-3">
                                         <h5 className="card-title">{person.result.properties.name}</h5>
-                                        <p className="card-text">Gender: {person.result.properties.gender}</p>
-                                        <p className="card-text">Height: {person.result.properties.height}</p>
-                                        <p className="card-text">Birth Year: {person.result.properties.birth_year}</p>
-                                        <Link to={`/cardView/${person.result.uid}`} className="btn btn-primary">View Details</Link>
-                                        <button onClick={()=>handlerNavigate(person)}></button>
+                                        <Link to={`/cardView/${person.result.uid}`} className="btn btn-outline-dark me-4">View Details</Link>
+                                        <button type="button" className="btn btn-outline-warning" onClick={()=>handlerFavorites(person.result.properties.name)}><CiHeart /></button>
                                     </div>
                                 </div>
                             </div>
@@ -49,7 +59,6 @@ export const PeopleComponents = () => {
                 </div>
             </div>
         )}
-        
         </div>
     );
 }

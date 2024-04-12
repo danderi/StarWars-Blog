@@ -28,10 +28,7 @@ const Layout = () => {
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
 					<Routes>
-						<Route path="/" element={<Home />} />
-						<Route path="/demo" element={<Demo />} />
-						<Route path="/single/:theid" element={<Single />} />
-						<Route path="/nueva-vista" element={<NuevaVista />} />
+						<Route path="/" element={<MainView />} />
 						<Route path="/mainView" element={<MainView />} />
 						<Route path="/cardView/:uid" element={<CardView />} />
 						<Route path="/people-components" element={<PeopleComponents />} />
