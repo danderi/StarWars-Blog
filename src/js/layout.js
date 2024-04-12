@@ -7,6 +7,8 @@ import {CardView} from "./views/CardView.jsx";
 
 import { PeopleComponents } from "./component/PeopleComponents.jsx";
 import { PlanetComponents } from "./component/PlanetComponents.jsx";
+import { VehicleComponents } from "./component/VehicleComponents.jsx";
+import { SpeciesComponents } from "./component/SpeciesComponents.jsx";
 
 import injectContext from "./store/appContext";
 
@@ -28,6 +30,8 @@ const Layout = () => {
 						<Route path="/cardView/:uid" element={<CardView />} />
 						<Route path="/people-components" element={<PeopleComponents />} />
 						<Route path="/planet-components" element={<PlanetComponents />} />
+						<Route path="/vehicle-components" element={<VehicleComponents />} />
+						<Route path="/species-components" element={<SpeciesComponents />} />
 						<Route path="*" element={<h1>Not found!</h1>} />
 					</Routes>
 				</ScrollToTop>

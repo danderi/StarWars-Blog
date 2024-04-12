@@ -6,6 +6,8 @@ import {Footer} from "../component/Footer.jsx"
 import { PeopleComponents } from "../component/PeopleComponents.jsx";
 import StarBackground from "../../img/background.jpg";
 import { PlanetComponents } from "../component/PlanetComponents.jsx";
+import { VehicleComponents } from "../component/VehicleComponents.jsx";
+import { SpeciesComponents } from "../component/SpeciesComponents.jsx";
 
 export const MainView = () => {
   return (
@@ -13,6 +15,8 @@ export const MainView = () => {
         <Navbar />
         <PeopleComponents />
         <PlanetComponents />
+        <VehicleComponents />
+        <SpeciesComponents />
         <Footer />
     </div>
   )

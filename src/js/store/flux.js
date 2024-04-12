@@ -2,6 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			favorites: [],
+
 			peopleDetails: [],
 			peopleMain:[],
 			isLoadingPeople: false,
@@ -9,6 +10,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 			planetDetails: [],
 			planetMain:[],
 			isLoadingPlanet: false,
+
+			vehicleDetails: [],
+			vehicleMain:[],
+			isLoadingVehicle: false,
+
+			speciesDetails: [],
+			speciesMain:[],
+			isLoadingSpecies: false,
+
 		},
 		actions: {
 			
@@ -37,6 +47,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 			loadingPlanetMessage: () => {
 				const store = getStore();
 				setStore({...store, isLoadingPlanet: true})
+			},
+
+			loadingVehicleMessage: () => {
+				const store = getStore();
+				setStore({...store, isVehiclePlanet: true})
+			},
+
+			loadingSpeciesMessage: () => {
+				const store = getStore();
+				setStore({...store, isSpeciesPlanet: true})
+			},
+
+			loadingStarshipMessage: () => {
+				const store = getStore();
+				setStore({...store, isStarshipPlanet: true})
 			},
 
 			loadPeopleDetails: async (who) => {
@@ -115,6 +140,84 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log("ESTE ES EL URL EN FLUX", store.planetMain[0].next)
 				}catch(error){
 					console.error('Error fetching planets:', error)
+				}
+			},
+
+			loadVehicleDetails: async (who) => {
+				let vehicleMainList = [];
+				const store = getStore();
+
+				let url = `https://www.swapi.tech/api/vehicles/`;
+				if(who == "next") url=store.vehicleMain[0].next;
+				if(who == "previous")url=store.vehicleMain[0].previous;
+				
+				try{
+					const response = await fetch(url);
+					if(!response.ok){
+						throw new Error(`Network response from api/people was not ok`);
+					}
+					const data = await response.json();
+					vehicleMainList.push(data)
+
+					console.log(data.next,data.previous)
+
+					let vehicleDetaillist = [];
+					
+					for(let vehicle of data.results){
+					try{
+						const response = await fetch(vehicle.url);
+						const vehicleData = await response.json();
+						if(!vehicleData.message) continue;
+						vehicleDetaillist.push(vehicleData)
+
+						console.log("desde flux", vehicleData);
+					}catch(error){
+						console.error('Error fetching character details for:', vehicle.name, error)
+					}
+				}
+				setStore({...store, vehicleDetails:vehicleDetaillist, vehicleMain:vehicleMainList, isLoadingVehicle: false})
+				console.log("ESTE ES EL URL EN FLUX", store.vehicleMain[0].next)
+				}catch(error){
+					console.error('Error fetching vehicles:', error)
+				}
+			},
+
+			loadSpeciesDetails: async (who) => {
+				let speciesMainList = [];
+				const store = getStore();
+
+				let url = `https://www.swapi.tech/api/species/`;
+				if(who == "next") url=store.speciesMain[0].next;
+				if(who == "previous")url=store.speciesMain[0].previous;
+				
+				try{
+					const response = await fetch(url);
+					if(!response.ok){
+						throw new Error(`Network response from api/people was not ok`);
+					}
+					const data = await response.json();
+					speciesMainList.push(data)
+
+					console.log(data.next,data.previous)
+
+					let speciesDetaillist = [];
+					
+					for(let species of data.results){
+					try{
+						const response = await fetch(species.url);
+						const speciesData = await response.json();
+						if(!speciesData.message) continue;
+						speciesDetaillist.push(speciesData)
+
+						console.log("desde flux", speciesData);
+					}catch(error){
+						console.error('Error fetching character details for:', species.name, error)
+					}
+				}
+				setStore({...store, speciesDetails:speciesDetaillist, speciesMain:speciesMainList, isLoadingSpecies: false})
+				console.log("ESTE ES EL URL EN FLUX", store.speciesMain[0].next)
+				}catch(error){
+					console.error('Error fetching vehicles:', error)
 				}
 			},
 
