@@ -44,7 +44,7 @@ export const SpeciesComponents = () => {
                 <div className="scroll-container" style={{ maxWidth: "100%", maxHeight: "100%", overflowX: "auto" }}>
                     <div className="row flex-nowrap" style={{ margin: "0" }}>
                         {store.speciesDetails.map((species, index) => (
-                            <div key={index} className="col-4" style={{ width: "300px", padding: "0 4px" }}>
+                            <div key={index} className="col-4" style={{ width: "300px", padding: "4px" }}>
                                 <div className="card-main species" style={{ width: "75%" }}>
                                     <img src={`https://starwars-visualguide.com/assets/img/species/${species.result.uid}.jpg`} onError="this.src='../../img/image_not_found.jpg'" className="card-img-top" alt="..." style={{ height: "10%" }} />
                                     <div className="card-body mb-3">

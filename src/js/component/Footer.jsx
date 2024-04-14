@@ -10,8 +10,7 @@ export const Footer = () => {
             <footer className="footer mt-auto py-3 text-center" style={{backgroundImage: `url(${StarBackground})`, backgroundSize: "cover"}}>
                 <p style={{color:"white" }}>
                     May the force be with you...<img style={{height:"80px", width:"65px" }} src={BabyYoda} />
-                </p>
-                
+                </p>  
             </ footer>
         </div>
     )

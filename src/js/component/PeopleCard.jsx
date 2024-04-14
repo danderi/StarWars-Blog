@@ -16,14 +16,14 @@ export const PeopleCard = () => {
 
   return (
     <div className="container mt-4" style={{width: "60%", background:"black", color:"white", padding:"12px"}}>
-      <div className="card" style={{background:"black"}}>
+      <div className="card-unit" >
         <div className="row g-0">
           <div className="col-md-6">
-            <img src={`https://starwars-visualguide.com/assets/img/characters/${uid}.jpg`} className="img-fluid" alt="..." />
+            <img src={`https://starwars-visualguide.com/assets/img/characters/${uid}.jpg`} className="img-fluid" alt={`An image of ${person.result.properties.name}`} />
           </div>
           <div className="col-md-6">
             <div className="card-body">
-              <h5 className="card-title">{person.result.properties.name}</h5>
+              <h1 className="card-title">{person.result.properties.name}</h1>
               <p className="card-text">Gender: {person.result.properties.gender}</p>
               <p className="card-text">Height: {person.result.properties.height}</p>
               <p className="card-text">Birth Year: {person.result.properties.birth_year}</p>

@@ -10,7 +10,7 @@ export const SpeciesCardView = () => {
     <div style={{backgroundImage: `url(${StarBackground})`, backgroundSize: "cover"}}>
         <Navbar />
         <SpeciesCard />
-        <Link className="d-flex justify-content-center"to={`/mainView`}>MainView</Link>
+        <Link className="d-flex justify-content-center"to={`/mainView`}>Go back</Link>
         <Footer />
     </div>
   )

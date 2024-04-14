@@ -17,14 +17,14 @@ export const PlanetCard = () => {
 
   return (
     <div className="container mt-4" style={{width: "60%", background:"black", color:"white", padding:"12px"}}>
-      <div className="card" style={{background:"black"}}>
+      <div className="card-unit">
         <div className="row g-0">
           <div className="col-md-6">
             <img src={uid === "1" ? Tatooine : `https://starwars-visualguide.com/assets/img/planets/${uid}.jpg`} className="img-fluid" alt="..." />
           </div>
           <div className="col-md-6">
             <div className="card-body">
-              <h5 className="card-title">{planet.result.properties.name}</h5>
+              <h1 className="card-title">{planet.result.properties.name}</h1>
               <p className="card-text">Diameter: {planet.result.properties.diameter}</p>
               <p className="card-text">Rotation period: {planet.result.properties.rotation_period}</p>
               <p className="card-text">Orbital period: {planet.result.properties.orbital_period}</p>

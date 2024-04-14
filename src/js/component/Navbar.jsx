@@ -13,8 +13,6 @@ export const Navbar = () => {
         setFavorites(store.favorites);
     }, [store.favorites]);
 
-    
-
     return (
         <div>
             <nav className="navbar navbar-dark bg-dark" style={{backgroundImage: `url(${StarBackground})`, backgroundSize: "cover"}}>

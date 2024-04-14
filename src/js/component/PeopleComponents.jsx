@@ -41,10 +41,10 @@ export const PeopleComponents = () => {
                 </div>
             ) : (
             <div className="overflow-x-auto" style={{ maxWidth: "100%", Height: "10vh" }}>
-                <div className="scroll-container" style={{ maxWidth: "100%", maxHeight: "100%", overflowX: "auto" }}>
+                <div className="scroll-container" >
                     <div className="row flex-nowrap" style={{ margin: "0" }}>
                         {store.peopleDetails.map((person, index) => (
-                            <div key={index} className="col-4" style={{ width: "300px", padding: "0 4px" }}>
+                            <div key={index} className="col-4" style={{ width: "300px", padding: "4px" }}>
                                 <div className="card-main" style={{ width: "75%" }}>
                                     <img src={`https://starwars-visualguide.com/assets/img/characters/${person.result.uid}.jpg`} className="card-img-top" onError="this.src='../../img/image_not_found.jpg'" alt="..." style={{ height: "10%" }} />
                                     <div className="card-body mb-3">
