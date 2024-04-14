@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import {LoadingComponent} from "./LoadingComponent.jsx";
+import  Tatooine  from "../../img/Tatooine.jpg";
 
 export const PlanetCard = () => {
   const { uid } = useParams(); // extraigo el UID de la URL
@@ -19,7 +20,7 @@ export const PlanetCard = () => {
       <div className="card" style={{background:"black"}}>
         <div className="row g-0">
           <div className="col-md-6">
-            <img src={`https://starwars-visualguide.com/assets/img/planets/${uid}.jpg`} className="img-fluid" alt="..." />
+            <img src={uid === "1" ? Tatooine : `https://starwars-visualguide.com/assets/img/planets/${uid}.jpg`} className="img-fluid" alt="..." />
           </div>
           <div className="col-md-6">
             <div className="card-body">
