@@ -5,7 +5,8 @@ import { CiHeart } from "react-icons/ci";
 import { GrPrevious } from "react-icons/gr";
 import { GrNext } from "react-icons/gr";
 import { LoadingComponent } from "./LoadingComponent.jsx";
-
+import  Tatooine  from "../../img/Tatooine.jpg";
+import NotFound from "../../img/image_not_found.jpg"
 
 
 export const PlanetComponents = () => {
@@ -29,7 +30,7 @@ export const PlanetComponents = () => {
 
     return (
         <div style={{margin: "30px"}}>
-            <h3 className="peopleComponents ms-3">Planets {store.isLoadingPlanet === true ? <span className="fs-5"><LoadingComponent /></span> : <span></span>}</h3>
+            <h3 className="planetComponents ms-3">Planets {store.isLoadingPlanet === true ? <span className="fs-5"><LoadingComponent /></span> : <span></span>}</h3>
             <div className="d-flex justify-content-center mb-4">
                 {store.planetMain.length === 0 || store.planetMain[0].previous === null? <p></p>: <button type="button" className="btn btn-dark me-2" onClick={handlerPlanetPrevious}><GrPrevious /></button>}
                 {store.planetMain.length === 0 || store.planetMain[0].next === null? <p></p>: <button type="button" className="btn btn-dark" onClick={handlerPlanetNext}><GrNext /></button>}
@@ -44,11 +45,11 @@ export const PlanetComponents = () => {
                     <div className="row flex-nowrap" style={{ margin: "0" }}>
                         {store.planetDetails.map((planet, index) => (
                             <div key={index} className="col-4" style={{ width: "300px", padding: "0 4px" }}>
-                                <div className="card-main" style={{ width: "75%" }}>
-                                    <img src={`https://starwars-visualguide.com/assets/img/planets/${planet.result.uid}.jpg`} className="card-img-top" alt="..." style={{ height: "10%" }} />
+                                <div className="card-main planet" style={{ width: "75%" }}>
+                                    <img src={planet.result.uid === "1" ? Tatooine : `https://starwars-visualguide.com/assets/img/planets/${planet.result.uid}.jpg`} onError="this.src='../../img/image_not_found.jpg'" className="card-img-top" alt="..." style={{ height: "10%" }} />
                                     <div className="card-body mb-3">
                                         <h5 className="card-title">{planet.result.properties.name}</h5>
-                                        <Link to={`/cardView/${planet.result.uid}`} className="btn btn-outline-dark me-4">View Details</Link>
+                                        <Link to={`/planetCardView/${planet.result.uid}`} className="btn btn-outline-light me-4">View Details</Link>
                                         <button type="button" className="btn btn-outline-warning" onClick={()=>handlerFavorites(planet.result.properties.name)}><CiHeart /></button>
                                     </div>
                                 </div>

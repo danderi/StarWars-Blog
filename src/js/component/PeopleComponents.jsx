@@ -5,6 +5,7 @@ import { CiHeart } from "react-icons/ci";
 import { GrPrevious } from "react-icons/gr";
 import { GrNext } from "react-icons/gr";
 import { LoadingComponent } from "./LoadingComponent.jsx";
+import NotFound from "../../img/image_not_found.jpg"
 
 
 
@@ -45,10 +46,10 @@ export const PeopleComponents = () => {
                         {store.peopleDetails.map((person, index) => (
                             <div key={index} className="col-4" style={{ width: "300px", padding: "0 4px" }}>
                                 <div className="card-main" style={{ width: "75%" }}>
-                                    <img src={`https://starwars-visualguide.com/assets/img/characters/${person.result.uid}.jpg`} className="card-img-top" alt="..." style={{ height: "10%" }} />
+                                    <img src={`https://starwars-visualguide.com/assets/img/characters/${person.result.uid}.jpg`} className="card-img-top" onError="this.src='../../img/image_not_found.jpg'" alt="..." style={{ height: "10%" }} />
                                     <div className="card-body mb-3">
                                         <h5 className="card-title">{person.result.properties.name}</h5>
-                                        <Link to={`/cardView/${person.result.uid}`} className="btn btn-outline-dark me-4">View Details</Link>
+                                        <Link to={`/cardView/${person.result.uid}`} className="btn btn-outline-light me-4">View Details</Link>
                                         <button type="button" className="btn btn-outline-warning" onClick={()=>handlerFavorites(person.result.properties.name)}><CiHeart /></button>
                                     </div>
                                 </div>

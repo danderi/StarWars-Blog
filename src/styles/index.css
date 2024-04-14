@@ -16,11 +16,34 @@ body {
   box-shadow: 0 0 10px rgba(240, 223, 74, 0.968);
 }
 
-.card-main {
-  background: rgb(201, 200, 196);
-  border-radius: 10px;
+.card-main.planet:hover {
+  box-shadow: 0 0 10px rgba(186, 44, 44, 0.968);
 }
 
-.peopleComponents {
-  color: rgb(247, 247, 179);
+.card-main.vehicle:hover {
+  box-shadow: 0 0 20px rgba(39, 56, 172, 0.968);
 }
+
+.card-main.species:hover {
+  box-shadow: 0 0 20px rgba(55, 159, 31, 0.968);
+}
+
+.card-main {
+  background: rgb(7, 7, 7);
+  border-radius: 10px;
+  color:rgb(181, 196, 196)
+}
+
+.peopleComponents, .vehicleComponents, .speciesComponents, .planetComponents{
+  color: whitesmoke;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: lighter;
+}
+
+.dropdown-menu {
+  background: black;
+  color:rgb(201, 200, 196)
+}
+
+
+

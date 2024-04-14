@@ -51,17 +51,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			loadingVehicleMessage: () => {
 				const store = getStore();
-				setStore({...store, isVehiclePlanet: true})
+				setStore({...store, isLoadingVehicle: true})
 			},
 
 			loadingSpeciesMessage: () => {
 				const store = getStore();
-				setStore({...store, isSpeciesPlanet: true})
-			},
-
-			loadingStarshipMessage: () => {
-				const store = getStore();
-				setStore({...store, isStarshipPlanet: true})
+				setStore({...store, isLoadingSpecies: true})
 			},
 
 			loadPeopleDetails: async (who) => {

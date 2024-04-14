@@ -25,7 +25,7 @@ export const Navbar = () => {
                             Favorites {store.favorites.length}
                         </button >
                         <ul className="dropdown-menu">
-                            {favorites.length === 0 ? <li>--EMPTY--</li> : favorites.map((item, index) => (<li className='d-flex justify-content-between pb-2' key={index}><span>{item}</span>
+                            {favorites.length === 0 ? <li className='text-center'>--EMPTY--</li> : favorites.map((item, index) => (<li className='d-flex justify-content-between pb-2' key={index}><span>{item}</span>
                             <button className="btn btn-danger" onClick={() => { actions.refreshFavorites(item); }}>
                                 <TiDeleteOutline />
                             </button></li>))}
