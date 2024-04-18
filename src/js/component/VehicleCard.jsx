@@ -2,12 +2,11 @@ import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import {LoadingComponent} from "./LoadingComponent.jsx";
+import noPicture from "../../img/no-picture.jpg"
 
 export const VehicleCard = () => {
-  const { uid } = useParams(); // extraigo el UID de la URL
+  const { uid } = useParams(); 
   const { store } = useContext(Context);
-
-  // Encuentro a la planeta correspondiente al UID proporcionado
   const vehicle = store.vehicleDetails.find(vehicle => vehicle.result.uid === uid);
 
   if (!vehicle) {
@@ -19,7 +18,7 @@ export const VehicleCard = () => {
       <div className="card-unit">
         <div className="row g-0">
           <div className="col-md-6">
-            <img src={`https://starwars-visualguide.com/assets/img/vehicles/${uid}.jpg`} className="img-fluid" alt="..." />
+            <img src={`https://starwars-visualguide.com/assets/img/vehicles/${uid}.jpg`} onError={(e)=> e.target.src = noPicture} className="img-fluid" alt="..." />
           </div>
           <div className="col-md-6">
             <div className="card-body">

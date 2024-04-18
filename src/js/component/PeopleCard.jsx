@@ -2,12 +2,11 @@ import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import {LoadingComponent} from "./LoadingComponent.jsx";
+import noPicture from "../../img/no-picture.jpg"
 
 export const PeopleCard = () => {
-  const { uid } = useParams(); // extraigo el UID de la URL
+  const { uid } = useParams(); 
   const { store } = useContext(Context);
-
-  // Encuentro a la persona correspondiente al UID proporcionado
   const person = store.peopleDetails.find(person => person.result.uid === uid);
 
   if (!person) {
@@ -19,7 +18,7 @@ export const PeopleCard = () => {
       <div className="card-unit" >
         <div className="row g-0">
           <div className="col-md-6">
-            <img src={`https://starwars-visualguide.com/assets/img/characters/${uid}.jpg`} className="img-fluid" alt={`An image of ${person.result.properties.name}`} />
+            <img src={`https://starwars-visualguide.com/assets/img/characters/${uid}.jpg`} onError={(e)=> e.target.src = noPicture} className="img-fluid" alt={`An image of ${person.result.properties.name}`} />
           </div>
           <div className="col-md-6">
             <div className="card-body">

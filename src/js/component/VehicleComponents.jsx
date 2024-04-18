@@ -8,7 +8,6 @@ import { LoadingComponent } from "./LoadingComponent.jsx";
 import noPicture from "../../img/no-picture.jpg"
 
 
-
 export const VehicleComponents = () => {
     const { store, actions } = useContext(Context)
     
