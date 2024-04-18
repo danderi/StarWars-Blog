@@ -6,7 +6,7 @@ import { GrPrevious } from "react-icons/gr";
 import { GrNext } from "react-icons/gr";
 import { LoadingComponent } from "./LoadingComponent.jsx";
 import  Tatooine  from "../../img/Tatooine.jpg";
-import NotFound from "../../img/image_not_found.jpg"
+import noPicture from "../../img/no-picture.jpg"
 
 
 export const PlanetComponents = () => {
@@ -46,7 +46,7 @@ export const PlanetComponents = () => {
                         {store.planetDetails.map((planet, index) => (
                             <div key={index} className="col-4" style={{ width: "300px", padding: "4px" }}>
                                 <div className="card-main planet" style={{ width: "75%" }}>
-                                    <img src={planet.result.uid === "1" ? Tatooine : `https://starwars-visualguide.com/assets/img/planets/${planet.result.uid}.jpg`} onError="this.src='https://starwars-visualguide.com/assets/img/big-placeholder.jpg'" className="card-img-top" alt="..." style={{ height: "10%" }} />
+                                    <img src={planet.result.uid === "1" ? Tatooine : `https://starwars-visualguide.com/assets/img/planets/${planet.result.uid}.jpg`} onError={(e)=> e.target.src = noPicture} className="card-img-top" alt="..." style={{ height: "10%" }} />
                                     <div className="card-body mb-3">
                                         <h5 className="card-title">{planet.result.properties.name}</h5>
                                         <Link to={`/planetCardView/${planet.result.uid}`} className="btn btn-outline-light me-4">View Details</Link>
