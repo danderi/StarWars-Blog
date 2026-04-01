@@ -18,7 +18,7 @@ export const PeopleCard = () => {
       <div className="card-unit" >
         <div className="row g-0">
           <div className="col-md-6">
-            <img src={`https://starwars-visualguide.com/assets/img/characters/${uid}.jpg`} onError={(e)=> e.target.src = noPicture} className="img-fluid" alt={`An image of ${person.result.properties.name}`} />
+            <img src={`/img/characters/${uid}.jpg`} onError={(e)=> e.target.src = noPicture} className="img-fluid" alt={`An image of ${person.result.properties.name}`} />
           </div>
           <div className="col-md-6">
             <div className="card-body">
