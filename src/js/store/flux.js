@@ -87,10 +87,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					);
 
 					const peopleDetaillist = (await Promise.all(promises)).filter(item => item && item.message);
-
-					// setStore({...store, peopleDetails:peopleDetaillist, peopleMain:peopleMainList})
 					setStore({ ...store, peopleDetails: peopleDetaillist, peopleMain: peopleMainList, isLoadingPeople: false })
-					console.log("ESTE ES EL URL EN FLUX", store.peopleMain[0].next)
 				} catch (error) {
 					console.error('Error fetching characters:', error)
 				}
@@ -126,7 +123,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const planetDetaillist = (await Promise.all(promises))
 						.filter(item => item && item.message);
 					setStore({ ...store, planetDetails: planetDetaillist, planetMain: planetMainList, isLoadingPlanet: false })
-					console.log("ESTE ES EL URL EN FLUX", store.planetMain[0].next)
 				} catch (error) {
 					console.error('Error fetching planets:', error)
 				}
@@ -162,7 +158,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const vehicleDetaillist = (await Promise.all(promises))
 						.filter(item => item && item.message);
 					setStore({ ...store, vehicleDetails: vehicleDetaillist, vehicleMain: vehicleMainList, isLoadingVehicle: false })
-					console.log("ESTE ES EL URL EN FLUX", store.vehicleMain[0].next)
 				} catch (error) {
 					console.error('Error fetching vehicles:', error)
 				}
@@ -198,26 +193,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const speciesDetaillist = (await Promise.all(promises))
 						.filter(item => item && item.message);
 					setStore({ ...store, speciesDetails: speciesDetaillist, speciesMain: speciesMainList, isLoadingSpecies: false })
-					console.log("ESTE ES EL URL EN FLUX", store.speciesMain[0].next)
 				} catch (error) {
 					console.error('Error fetching vehicles:', error)
 				}
 			},
 
-			// changeColor: (index, color) => {
-			// 	//get the store
-			// 	const store = getStore();
-
-			// 	//we have to loop the entire demo array to look for the respective index
-			// 	//and change its color
-			// 	const demo = store.demo.map((elm, i) => {
-			// 		if (i === index) elm.background = color;
-			// 		return elm;
-			// 	});
-
-			// 	//reset the global store
-			// 	setStore({ demo: demo });
-			// }
 		}
 	};
 };
