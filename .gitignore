@@ -65,3 +65,4 @@ public/
 !.env.example
 .now
 .vercel
+.env*.local
