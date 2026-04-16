@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import {LoadingComponent} from "./LoadingComponent.jsx";
-import noPicture from "../../img/no-picture.jpg"
+
 
 export const SpeciesCard = () => {
   const { uid } = useParams(); 
@@ -18,7 +18,7 @@ export const SpeciesCard = () => {
       <div className="card-unit" >
         <div className="row g-0">
           <div className="col-md-6">
-            <img src={`https://starwars-visualguide.com/assets/img/species/${uid}.jpg`} onError={(e)=> e.target.src = noPicture} className="img-fluid" alt="..." />
+            <img src={`https://starwars-visualguide.com/assets/img/species/${uid}.jpg`} onError={(e)=> e.target.src = "/img/no-picture.jpg"} className="img-fluid" alt="..." />
           </div>
           <div className="col-md-6">
             <div className="card-body">

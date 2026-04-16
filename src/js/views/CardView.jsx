@@ -4,11 +4,11 @@ import { Context } from "../store/appContext";
 import {Navbar} from "../component/Navbar.jsx"
 import {Footer} from "../component/Footer.jsx"
 import { PeopleCard } from "../component/PeopleCard.jsx";
-import StarBackground from "../../img/background.jpg"
+
 
 export const CardView = () => {
   return (
-    <div style={{backgroundImage: `url(${StarBackground})`, backgroundSize: "cover"}}>
+    <div style={{backgroundImage: `url(/img/background.jpg)`, backgroundSize: "cover"}}>
         <Navbar />
         <PeopleCard />
         <Link className="d-flex justify-content-center"to={`/mainView`}>Go back</Link>

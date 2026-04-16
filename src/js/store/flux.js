@@ -86,7 +86,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							})
 					);
 
-					const peopleDetaillist = (await Promise.all(promises)).filter(item => item && item.message);
+					const peopleDetaillist = (await Promise.all(promises)).filter(item => item && item.result);
 					setStore({ ...store, peopleDetails: peopleDetaillist, peopleMain: peopleMainList, isLoadingPeople: false })
 				} catch (error) {
 					console.error('Error fetching characters:', error)
@@ -121,7 +121,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					);
 
 					const planetDetaillist = (await Promise.all(promises))
-						.filter(item => item && item.message);
+						.filter(item => item && item.result);
 					setStore({ ...store, planetDetails: planetDetaillist, planetMain: planetMainList, isLoadingPlanet: false })
 				} catch (error) {
 					console.error('Error fetching planets:', error)
@@ -156,7 +156,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					);
 
 					const vehicleDetaillist = (await Promise.all(promises))
-						.filter(item => item && item.message);
+						.filter(item => item && item.result);
 					setStore({ ...store, vehicleDetails: vehicleDetaillist, vehicleMain: vehicleMainList, isLoadingVehicle: false })
 				} catch (error) {
 					console.error('Error fetching vehicles:', error)
@@ -191,7 +191,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					);
 
 					const speciesDetaillist = (await Promise.all(promises))
-						.filter(item => item && item.message);
+						.filter(item => item && item.result);
 					setStore({ ...store, speciesDetails: speciesDetaillist, speciesMain: speciesMainList, isLoadingSpecies: false })
 				} catch (error) {
 					console.error('Error fetching vehicles:', error)

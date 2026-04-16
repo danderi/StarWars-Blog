@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import {LoadingComponent} from "./LoadingComponent.jsx";
-import noPicture from "../../img/no-picture.jpg"
+
 
 export const PeopleCard = () => {
   const { uid } = useParams(); 
@@ -18,7 +18,7 @@ export const PeopleCard = () => {
       <div className="card-unit" >
         <div className="row g-0">
           <div className="col-md-6">
-            <img src={`/img/characters/${uid}.jpg`} onError={(e)=> e.target.src = noPicture} className="img-fluid" alt={`An image of ${person.result.properties.name}`} />
+            <img src={`/img/characters/${uid}.jpg`} onError={(e)=> e.target.src = "img/no-picture.jpg"} className="img-fluid" alt={`An image of ${person.result.properties.name}`} />
           </div>
           <div className="col-md-6">
             <div className="card-body">

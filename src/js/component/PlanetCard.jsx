@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import {LoadingComponent} from "./LoadingComponent.jsx";
-import  Tatooine  from "../../img/Tatooine.jpg";
-import noPicture from "../../img/no-picture.jpg"
+
+
 
 export const PlanetCard = () => {
   const { uid } = useParams(); 
@@ -19,7 +19,7 @@ export const PlanetCard = () => {
       <div className="card-unit">
         <div className="row g-0">
           <div className="col-md-6">
-            <img src={uid === "1" ? Tatooine : `https://starwars-visualguide.com/assets/img/planets/${uid}.jpg`} onError={(e)=> e.target.src = noPicture} className="img-fluid" alt="..." />
+            <img src={uid === "1" ? "/img/Tatooine.jpg" : `https://starwars-visualguide.com/assets/img/planets/${uid}.jpg`} onError={(e)=> e.target.src = "/img/no-picture.jpg"} className="img-fluid" alt="..." />
           </div>
           <div className="col-md-6">
             <div className="card-body">
