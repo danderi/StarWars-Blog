@@ -5,18 +5,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			peopleDetails: [],
 			peopleMain: [],
+			peoplePage: 1,
 			isLoadingPeople: false,
 
 			planetDetails: [],
 			planetMain: [],
+			planetPage: 1,
 			isLoadingPlanet: false,
 
 			vehicleDetails: [],
 			vehicleMain: [],
+			vehiclePage: 1,
 			isLoadingVehicle: false,
 
 			speciesDetails: [],
 			speciesMain: [],
+			speciesPage: 1,
 			isLoadingSpecies: false,
 
 		},
@@ -60,141 +64,158 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			loadPeopleDetails: async (who) => {
-				let peopleMainList = [];
 				const store = getStore();
-
-				let url = `https://www.swapi.tech/api/people/`;
-				if (who == "next") url = store.peopleMain[0].next;
-				if (who == "previous") url = store.peopleMain[0].previous;
+				let page = store.peoplePage;
+				if (who === "next") page = page + 1;
+				if (who === "previous") page = page - 1;
 
 				try {
-					const response = await fetch(url);
-					if (!response.ok) {
-						throw new Error(`Network response from api/people was not ok`);
-					}
-					const data = await response.json();
-					peopleMainList.push(data)
+					const [techRes, devRes] = await Promise.all([
+						fetch(`https://www.swapi.tech/api/people/?page=${page}&limit=10`),
+						fetch(`https://swapi.dev/api/people/?page=${page}`)
+					]);
 
-					console.log(data.next, data.previous)
+					const techData = await techRes.json();
+					const devData = await devRes.json();
 
-					const promises = data.results.map(character =>
-						fetch(character.url)
-							.then(res => res.json())
-							.catch(err => {
-								console.error('Error fetching character:', character.name, err);
-								return null;
-							})
-					);
+					const combined = techData.results.map((techItem, index) => ({
+						result: {
+							uid: techItem.uid,
+							properties: devData.results[index]
+						}
+					}));
 
-					const peopleDetaillist = (await Promise.all(promises)).filter(item => item && item.result);
-					setStore({ ...store, peopleDetails: peopleDetaillist, peopleMain: peopleMainList, isLoadingPeople: false })
+					const mainData = [{
+						next: techData.next,
+						previous: techData.previous
+					}];
+
+					setStore({
+						peopleDetails: combined,
+						peopleMain: mainData,
+						peoplePage: page,
+						isLoadingPeople: false
+					});
+
 				} catch (error) {
-					console.error('Error fetching characters:', error)
+					console.error('Error fetching people:', error)
 				}
 			},
 
 			loadPlanetDetails: async (who) => {
-				let planetMainList = [];
 				const store = getStore();
-
-				let url = `https://www.swapi.tech/api/planets/`;
-				if (who == "next") url = store.planetMain[0].next;
-				if (who == "previous") url = store.planetMain[0].previous;
+				let page = store.planetPage;
+				if (who === "next") page = page + 1;
+				if (who === "previous") page = page - 1;
 
 				try {
-					const response = await fetch(url);
-					if (!response.ok) {
-						throw new Error(`Network response from api/people was not ok`);
-					}
-					const data = await response.json();
-					planetMainList.push(data)
+					const [techRes, devRes] = await Promise.all([
+						fetch(`https://www.swapi.tech/api/planets/?page=${page}&limit=10`),
+						fetch(`https://swapi.dev/api/planets/?page=${page}`)
+					]);
 
-					console.log(data.next, data.previous)
+					const techData = await techRes.json();
+					const devData = await devRes.json();
 
-					const promises = data.results.map(planet =>
-						fetch(planet.url)
-							.then(res => res.json())
-							.catch(err => {
-								console.error('Error fetching planet:', planet.name, err);
-								return null;
-							})
-					);
+					const combined = techData.results.map((techItem, index) => ({
+						result: {
+							uid: techItem.uid,
+							properties: devData.results[index]
+						}
+					}));
 
-					const planetDetaillist = (await Promise.all(promises))
-						.filter(item => item && item.result);
-					setStore({ ...store, planetDetails: planetDetaillist, planetMain: planetMainList, isLoadingPlanet: false })
+					const mainData = [{
+						next: techData.next,
+						previous: techData.previous
+					}];
+
+					setStore({
+						planetDetails: combined,
+						planetMain: mainData,
+						planetPage: page,
+						isLoadingPlanet: false
+					});
+
 				} catch (error) {
 					console.error('Error fetching planets:', error)
 				}
 			},
 
 			loadVehicleDetails: async (who) => {
-				let vehicleMainList = [];
 				const store = getStore();
-
-				let url = `https://www.swapi.tech/api/vehicles/`;
-				if (who == "next") url = store.vehicleMain[0].next;
-				if (who == "previous") url = store.vehicleMain[0].previous;
+				let page = store.vehiclePage;
+				if (who === "next") page = page + 1;
+				if (who === "previous") page = page - 1;
 
 				try {
-					const response = await fetch(url);
-					if (!response.ok) {
-						throw new Error(`Network response from api/people was not ok`);
-					}
-					const data = await response.json();
-					vehicleMainList.push(data)
+					const [techRes, devRes] = await Promise.all([
+						fetch(`https://www.swapi.tech/api/vehicles/?page=${page}&limit=10`),
+						fetch(`https://swapi.dev/api/vehicles/?page=${page}`)
+					]);
 
-					console.log(data.next, data.previous)
+					const techData = await techRes.json();
+					const devData = await devRes.json();
 
-					const promises = data.results.map(vehicle =>
-						fetch(vehicle.url)
-							.then(res => res.json())
-							.catch(err => {
-								console.error('Error fetching vehicle:', vehicle.name, err);
-								return null;
-							})
-					);
+					const combined = techData.results.map((techItem, index) => ({
+						result: {
+							uid: techItem.uid,
+							properties: devData.results[index]
+						}
+					}));
 
-					const vehicleDetaillist = (await Promise.all(promises))
-						.filter(item => item && item.result);
-					setStore({ ...store, vehicleDetails: vehicleDetaillist, vehicleMain: vehicleMainList, isLoadingVehicle: false })
+					const mainData = [{
+						next: techData.next,
+						previous: techData.previous
+					}];
+
+					setStore({
+						vehicleDetails: combined,
+						vehicleMain: mainData,
+						vehiclePage: page,
+						isLoadingVehicle: false
+					});
+
 				} catch (error) {
 					console.error('Error fetching vehicles:', error)
 				}
 			},
 
 			loadSpeciesDetails: async (who) => {
-				let speciesMainList = [];
 				const store = getStore();
-
-				let url = `https://www.swapi.tech/api/species/`;
-				if (who == "next") url = store.speciesMain[0].next;
-				if (who == "previous") url = store.speciesMain[0].previous;
+				let page = store.speciesPage;
+				if (who === "next") page = page + 1;
+				if (who === "previous") page = page - 1;
 
 				try {
-					const response = await fetch(url);
-					if (!response.ok) {
-						throw new Error(`Network response from api/people was not ok`);
-					}
-					const data = await response.json();
-					speciesMainList.push(data)
+					const [techRes, devRes] = await Promise.all([
+						fetch(`https://www.swapi.tech/api/species/?page=${page}&limit=10`),
+						fetch(`https://swapi.dev/api/species/?page=${page}`)
+					]);
 
-					console.log(data.next, data.previous)
+					const techData = await techRes.json();
+					const devData = await devRes.json();
 
-					const promises = data.results.map(species =>
-						fetch(species.url)
-							.then(res => res.json())
-							.catch(err => {
-								console.error('Error fetching species:', species.name, err);
-								return null;
-							})
-					);
+					const combined = techData.results.map((techItem, index) => ({
+						result: {
+							uid: techItem.uid,
+							properties: devData.results[index]
+						}
+					}));
 
-					const speciesDetaillist = (await Promise.all(promises))
-						.filter(item => item && item.result);
-					setStore({ ...store, speciesDetails: speciesDetaillist, speciesMain: speciesMainList, isLoadingSpecies: false })
+					const mainData = [{
+						next: techData.next,
+						previous: techData.previous
+					}];
+
+					setStore({
+						speciesDetails: combined,
+						speciesMain: mainData,
+						speciesPage: page,
+						isLoadingSpecies: false
+					});
+
 				} catch (error) {
-					console.error('Error fetching vehicles:', error)
+					console.error('Error fetching species:', error)
 				}
 			},
 
