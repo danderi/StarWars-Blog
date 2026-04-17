@@ -22,7 +22,7 @@
     {
       "src": "/(.*)",
       "headers": { "cache-control": "s-maxage=0" },
-      "dest": "/index.html"
+      "dest": "/dist/index.html"
     }
   ]
 }
